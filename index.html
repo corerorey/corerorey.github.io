@@ -1,13 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My GitHub Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corey | Minimalist Hub</title>
+    <!-- 'Inter' is the gold standard for clean, modern web typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. RESET & BASE --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f4f4; /* Very light grey for contrast */
+            color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* --- 2. THE GRID (The "Bento Box") --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 Columns */
+            grid-template-rows: auto auto auto;
+            gap: 15px; /* The space between blocks */
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* --- 3. THE CHAMBERS (BLOCKS) --- */
+        .block {
+            background: #ffffff;
+            padding: 30px;
+            border: 1px solid #e0e0e0;
+            text-decoration: none;
+            color: #1a1a1a;
+            transition: all 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Minimal interaction: darker border on hover, slight lift */
+        .block:hover {
+            border-color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* --- 4. TYPOGRAPHY & DETAILS --- */
+        h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 5px; }
+        h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
+        p { font-size: 0.9rem; color: #555; line-height: 1.5; }
+        .tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 15px; display: block; }
+        
+        .arrow { font-size: 1.2rem; align-self: flex-end; opacity: 0.2; transition: opacity 0.2s; }
+        .block:hover .arrow { opacity: 1; }
+
+        /* --- 5. SPECIFIC BLOCK SIZING --- */
+        /* The Header spans 2 columns */
+        .header-block { grid-column: span 2; }
+        
+        /* The "Tall" block spans 2 rows */
+        .tall-block { grid-row: span 2; }
+
+        /* Mobile Layout */
+        @media (max-width: 768px) {
+            .grid-container { grid-template-columns: 1fr; } /* Stack everything */
+            .header-block, .tall-block { grid-column: span 1; grid-row: span 1; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to my Website!</h1>
-    <p>This site is hosted on GitHub Pages.</p>
-    <p>I am learning Git and it is working!</p>
-    <a href="cv.pdf" target="_blank">View my CV (PDF)</a>
-    <a href="cv.html">See my interactive CV</a>
+
+    <div class="grid-container">
+        
+        <!-- BLOCK 1: INTRO (Spans 2 columns) -->
+        <div class="block header-block" style="cursor: default; border-color: #000;">
+            <div>
+                <span class="tag">Perfil</span>
+                <h1>Cory.</h1>
+                <p>Atmospheric Science Student.<br>Based in China.</p>
+            </div>
+        </div>
+
+        <!-- BLOCK 2: GITHUB PROFILE -->
+        <a href="https://github.com/corerorey" target="_blank" class="block">
+            <div>
+                <span class="tag">Code</span>
+                <h2>GitHub</h2>
+                <p>Repositorio central.</p>
+            </div>
+            <span class="arrow">↗</span>
+        </a>
+
+        <!-- BLOCK 3: CV PDF -->
+        <a href="cv.pdf" target="_blank" class="block">
+            <div>
+                <span class="tag">Résumé</span>
+                <h2>Curriculum</h2>
+                <p>Download PDF.</p>
+            </div>
+            <span class="arrow">↓</span>
+        </a>
+
+        <!-- BLOCK 4: WEB CV (Interactive) -->
+        <a href="cv.html" class="block">
+            <div>
+                <span class="tag">Interactivo</span>
+                <h2>Web CV</h2>
+                <p>Digital history.</p>
+            </div>
+            <span class="arrow">→</span>
+        </a>
+
+        <!-- BLOCK 5: BLOG / WRITING (Tall Block) -->
+        <!-- Note: You need to create blog.html later -->
+        <a href="blog.html" class="block tall-block">
+            <div>
+                <span class="tag">Bitácora</span>
+                <h2>Thoughts</h2>
+                <p style="margin-top:20px;">
+                    "Less is more."
+                    <br><br>
+                    Notes on modeling, algorithms, and minimalist design.
+                </p>
+            </div>
+            <span class="arrow">→</span>
+        </a>
+
+        <!-- BLOCK 6: LATEST PROJECT -->
+        <a href="https://github.com/corerorey/CMCM-Latex-Template" target="_blank" class="block">
+            <div>
+                <span class="tag">Proyecto</span>
+                <h2>CMCM Template</h2>
+                <p>LaTeX structure.</p>
+            </div>
+            <span class="arrow">↗</span>
+        </a>
+
+        <!-- BLOCK 7: CONTACT -->
+        <a href="mailto:your-email@example.com" class="block">
+            <div>
+                <span class="tag">Contacto</span>
+                <h2>Email Me</h2>
+                <p>Let's talk.</p>
+            </div>
+            <span class="arrow">@</span>
+        </a>
+
+    </div>
+
 </body>
 </html>
