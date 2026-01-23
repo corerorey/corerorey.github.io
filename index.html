@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corey | Minimalist Hub</title>
-    <!-- 'Inter' is the gold standard for clean, modern web typography -->
+    <title>Cory | Minimalist Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
@@ -13,7 +12,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f4f4f4; /* Very light grey for contrast */
+            background-color: #f4f4f4;
             color: #1a1a1a;
             display: flex;
             justify-content: center;
@@ -22,12 +21,12 @@
             padding: 20px;
         }
 
-        /* --- 2. THE GRID (The "Bento Box") --- */
+        /* --- 2. THE GRID --- */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 Columns */
+            grid-template-columns: repeat(3, 1fr);
             grid-template-rows: auto auto auto;
-            gap: 15px; /* The space between blocks */
+            gap: 15px;
             max-width: 900px;
             width: 100%;
         }
@@ -45,32 +44,55 @@
             justify-content: space-between;
         }
 
-        /* Minimal interaction: darker border on hover, slight lift */
-        .block:hover {
+        /* Hover effects */
+        .block-interactive:hover {
             border-color: #000;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        /* --- 4. TYPOGRAPHY & DETAILS --- */
+        /* --- 4. TYPOGRAPHY --- */
         h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 5px; }
         h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
         p { font-size: 0.9rem; color: #555; line-height: 1.5; }
         .tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 15px; display: block; }
         
         .arrow { font-size: 1.2rem; align-self: flex-end; opacity: 0.2; transition: opacity 0.2s; }
-        .block:hover .arrow { opacity: 1; }
+        .block-interactive:hover .arrow { opacity: 1; }
 
-        /* --- 5. SPECIFIC BLOCK SIZING --- */
-        /* The Header spans 2 columns */
-        .header-block { grid-column: span 2; }
+        /* --- 5. SPECIAL STYLES FOR NOTES LIST --- */
+        .note-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
         
-        /* The "Tall" block spans 2 rows */
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 4px;
+            transition: background 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        .note-item:hover {
+            background: #eaeaea;
+            color: #000;
+        }
+
+        /* --- 6. GRID SIZING --- */
+        .header-block { grid-column: span 2; }
         .tall-block { grid-row: span 2; }
 
-        /* Mobile Layout */
+        /* Mobile */
         @media (max-width: 768px) {
-            .grid-container { grid-template-columns: 1fr; } /* Stack everything */
+            .grid-container { grid-template-columns: 1fr; } 
             .header-block, .tall-block { grid-column: span 1; grid-row: span 1; }
         }
     </style>
@@ -79,7 +101,7 @@
 
     <div class="grid-container">
         
-        <!-- BLOCK 1: INTRO (Spans 2 columns) -->
+        <!-- BLOCK 1: INTRO -->
         <div class="block header-block" style="cursor: default; border-color: #000;">
             <div>
                 <span class="tag">Perfil</span>
@@ -88,28 +110,28 @@
             </div>
         </div>
 
-        <!-- BLOCK 2: GITHUB PROFILE -->
-        <a href="https://github.com/corerorey" target="_blank" class="block">
+        <!-- BLOCK 2: GITHUB -->
+        <a href="https://github.com/corerorey" target="_blank" class="block block-interactive">
             <div>
-                <span class="tag">Code</span>
+                <span class="tag">Código</span>
                 <h2>GitHub</h2>
-                <p>Repositorio central.</p>
+                <p>Central repo.</p>
             </div>
             <span class="arrow">↗</span>
         </a>
 
         <!-- BLOCK 3: CV PDF -->
-        <a href="cv.pdf" target="_blank" class="block">
+        <a href="cv.pdf" target="_blank" class="block block-interactive">
             <div>
-                <span class="tag">Résumé</span>
+                <span class="tag">Resumen</span>
                 <h2>Curriculum</h2>
-                <p>Download PDF.</p>
+                <p>PDF Format.</p>
             </div>
             <span class="arrow">↓</span>
         </a>
 
-        <!-- BLOCK 4: WEB CV (Interactive) -->
-        <a href="cv.html" class="block">
+        <!-- BLOCK 4: WEB CV -->
+        <a href="cv.html" class="block block-interactive">
             <div>
                 <span class="tag">Interactivo</span>
                 <h2>Web CV</h2>
@@ -118,23 +140,37 @@
             <span class="arrow">→</span>
         </a>
 
-        <!-- BLOCK 5: BLOG / WRITING (Tall Block) -->
-        <!-- Note: You need to create blog.html later -->
-        <a href="blog.html" class="block tall-block">
+        <!-- BLOCK 5: NOTES (THE TALL BLOCK) -->
+        <!-- This is no longer a single link, but a container for your notes -->
+        <div class="block tall-block">
             <div>
-                <span class="tag">Bitácora</span>
-                <h2>Thoughts</h2>
-                <p style="margin-top:20px;">
-                    "Less is more."
-                    <br><br>
-                    Notes on modeling, algorithms, and minimalist design.
-                </p>
-            </div>
-            <span class="arrow">→</span>
-        </a>
+                <span class="tag">Apuntes</span>
+                <h2>Physics Notes</h2>
+                <p>Lectures & Derivations.</p>
 
-        <!-- BLOCK 6: LATEST PROJECT -->
-        <a href="https://github.com/corerorey/CMCM-Latex-Template" target="_blank" class="block">
+                <!-- The List of PDF Links -->
+                <div class="note-list">
+                    
+                    <!-- Note 1: E&M -->
+                    <!-- RENAME FILE TO: EM_Notes.pdf -->
+                    <a href="EM_Notes.pdf" target="_blank" class="note-item">
+                        <span>Electromagnetism</span>
+                        <span>↗</span>
+                    </a>
+
+                    <!-- Note 2: Quantum -->
+                    <!-- RENAME FILE TO: Quantum_Notes.pdf -->
+                    <a href="Quantum_Notes.pdf" target="_blank" class="note-item">
+                        <span>Quantum Mech.</span>
+                        <span>↗</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK 6: PROJECT -->
+        <a href="https://github.com/corerorey/CMCM-Latex-Template" target="_blank" class="block block-interactive">
             <div>
                 <span class="tag">Proyecto</span>
                 <h2>CMCM Template</h2>
@@ -144,7 +180,7 @@
         </a>
 
         <!-- BLOCK 7: CONTACT -->
-        <a href="mailto:coryk2875@gmail.com" class="block">
+        <a href="mailto:coryk2875@gmail.com" class="block block-interactive">
             <div>
                 <span class="tag">Contacto</span>
                 <h2>Email Me</h2>
