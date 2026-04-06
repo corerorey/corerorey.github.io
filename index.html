@@ -3,193 +3,832 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cory | Minimalist Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <title>Cory Kong | Atmospheric Science</title>
+    <meta name="description" content="Academic homepage for Cory Kong, an atmospheric science student at Lanzhou University working on dust events, exposure diagnostics, and environmental health questions.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23171311'/%3E%3Ccircle cx='32' cy='32' r='18' fill='%2398552d'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* --- 1. RESET & BASE --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --paper: #f6f1e7;
+            --paper-strong: #efe6d7;
+            --ink: #171311;
+            --muted: #5f564e;
+            --line: rgba(23, 19, 17, 0.14);
+            --line-strong: rgba(23, 19, 17, 0.28);
+            --accent: #98552d;
+            --accent-soft: rgba(152, 85, 45, 0.12);
+            --hero-dark: #201714;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f4f4f4;
-            color: #1a1a1a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            font-family: "IBM Plex Sans", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top right, rgba(152, 85, 45, 0.16), transparent 32%),
+                radial-gradient(circle at bottom left, rgba(110, 84, 62, 0.14), transparent 28%),
+                var(--paper);
+            line-height: 1.6;
         }
 
-        /* --- 2. THE GRID --- */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: auto auto auto;
-            gap: 15px;
-            max-width: 900px;
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(23, 19, 17, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(23, 19, 17, 0.03) 1px, transparent 1px);
+            background-size: 72px 72px;
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .shell {
+            width: min(1120px, calc(100% - 2rem));
+            margin: 0 auto;
+        }
+
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            z-index: 20;
+            backdrop-filter: blur(14px);
+            background: rgba(246, 241, 231, 0.78);
+            border-bottom: 1px solid rgba(23, 19, 17, 0.08);
         }
 
-        /* --- 3. THE CHAMBERS (BLOCKS) --- */
-        .block {
-            background: #ffffff;
-            padding: 30px;
-            border: 1px solid #e0e0e0;
-            text-decoration: none;
-            color: #1a1a1a;
-            transition: all 0.2s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        /* Hover effects */
-        .block-interactive:hover {
-            border-color: #000;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        /* --- 4. TYPOGRAPHY --- */
-        h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 5px; }
-        h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
-        p { font-size: 0.9rem; color: #555; line-height: 1.5; }
-        .tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 15px; display: block; }
-        
-        .arrow { font-size: 1.2rem; align-self: flex-end; opacity: 0.2; transition: opacity 0.2s; }
-        .block-interactive:hover .arrow { opacity: 1; }
-
-        /* --- 5. SPECIAL STYLES FOR NOTES LIST --- */
-        .note-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .note-item {
+        .header-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 1rem 0;
+            gap: 1rem;
+        }
+
+        .brand {
             text-decoration: none;
-            color: #333;
-            padding: 10px;
-            background: #f9f9f9;
-            border-radius: 4px;
-            transition: background 0.2s;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
         }
-        
+
+        .brand strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .site-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 1.25rem;
+            font-size: 0.94rem;
+        }
+
+        .site-nav a {
+            text-decoration: none;
+            color: var(--muted);
+            position: relative;
+            transition: color 0.25s ease;
+        }
+
+        .site-nav a::after,
+        .text-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -0.16rem;
+            width: 100%;
+            height: 1px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s ease;
+        }
+
+        .site-nav a:hover,
+        .text-link:hover {
+            color: var(--ink);
+        }
+
+        .site-nav a:hover::after,
+        .text-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        .hero {
+            position: relative;
+            min-height: 100svh;
+            padding: 7rem 0 4.5rem;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+            background:
+                linear-gradient(135deg, rgba(23, 19, 17, 0.95), rgba(32, 23, 20, 0.92) 60%, rgba(69, 43, 31, 0.88)),
+                var(--hero-dark);
+            color: #f8f1e7;
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: auto;
+            border-radius: 999px;
+            filter: blur(16px);
+            opacity: 0.55;
+            pointer-events: none;
+        }
+
+        .hero::before {
+            width: 30rem;
+            height: 30rem;
+            right: -7rem;
+            bottom: -4rem;
+            background: radial-gradient(circle, rgba(220, 147, 88, 0.55) 0%, rgba(220, 147, 88, 0.06) 60%, transparent 75%);
+            animation: drift 20s ease-in-out infinite alternate;
+        }
+
+        .hero::after {
+            width: 22rem;
+            height: 22rem;
+            left: 18%;
+            top: 6rem;
+            background: radial-gradient(circle, rgba(161, 111, 72, 0.24) 0%, rgba(161, 111, 72, 0.05) 65%, transparent 80%);
+            animation: driftReverse 18s ease-in-out infinite alternate;
+        }
+
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.75fr);
+            gap: 4rem;
+            align-items: end;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: rgba(248, 241, 231, 0.72);
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 2.5rem;
+            height: 1px;
+            background: rgba(248, 241, 231, 0.45);
+        }
+
+        .hero-copy {
+            max-width: 40rem;
+        }
+
+        .hero-copy h1 {
+            font-family: "Fraunces", serif;
+            font-size: clamp(3.6rem, 8vw, 6.9rem);
+            line-height: 0.92;
+            letter-spacing: -0.06em;
+            margin-top: 1rem;
+        }
+
+        .hero-copy .subtitle {
+            font-size: clamp(1.1rem, 2.6vw, 1.7rem);
+            max-width: 28rem;
+            margin-top: 1.35rem;
+            color: rgba(248, 241, 231, 0.86);
+        }
+
+        .hero-copy .lede {
+            max-width: 34rem;
+            margin-top: 1.3rem;
+            color: rgba(248, 241, 231, 0.72);
+            font-size: 1rem;
+        }
+
+        .hero-actions,
+        .inline-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem 1rem;
+            margin-top: 2rem;
+        }
+
+        .button-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 1.1rem;
+            text-decoration: none;
+            border: 1px solid rgba(248, 241, 231, 0.18);
+            color: #f8f1e7;
+            transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .button-link.primary {
+            background: rgba(248, 241, 231, 0.1);
+            border-color: rgba(248, 241, 231, 0.32);
+        }
+
+        .button-link:hover {
+            transform: translateY(-2px);
+            background: rgba(248, 241, 231, 0.14);
+            border-color: rgba(248, 241, 231, 0.46);
+        }
+
+        .hero-rail {
+            display: grid;
+            gap: 1.4rem;
+        }
+
+        .rail-block {
+            padding-top: 1rem;
+            border-top: 1px solid rgba(248, 241, 231, 0.18);
+        }
+
+        .rail-label {
+            display: block;
+            margin-bottom: 0.45rem;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(248, 241, 231, 0.58);
+        }
+
+        .rail-text,
+        .rail-list {
+            color: rgba(248, 241, 231, 0.86);
+            font-size: 0.97rem;
+        }
+
+        .rail-list {
+            list-style: none;
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.08s; }
+        .delay-2 { animation-delay: 0.16s; }
+        .delay-3 { animation-delay: 0.24s; }
+        .delay-4 { animation-delay: 0.32s; }
+
+        main {
+            padding-bottom: 4rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-shell {
+            display: grid;
+            grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+            gap: 2rem 4rem;
+            align-items: start;
+            border-top: 1px solid var(--line);
+            padding-top: 2rem;
+        }
+
+        .section-intro {
+            position: sticky;
+            top: 5.5rem;
+        }
+
+        .section-kicker {
+            display: inline-block;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--accent);
+        }
+
+        .section-title {
+            font-family: "Fraunces", serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1;
+            margin-top: 0.9rem;
+        }
+
+        .section-blurb {
+            margin-top: 1rem;
+            color: var(--muted);
+            max-width: 24rem;
+        }
+
+        .stack {
+            display: grid;
+            gap: 1.4rem;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.2rem;
+        }
+
+        .detail-block {
+            padding-top: 1rem;
+            border-top: 1px solid var(--line);
+        }
+
+        .detail-block h3,
+        .work-item h3,
+        .snapshot-block h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+
+        .detail-block p,
+        .work-item p,
+        .snapshot-block p,
+        .resource-meta,
+        .contact-grid p {
+            color: var(--muted);
+        }
+
+        .pill-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            margin-top: 0.8rem;
+        }
+
+        .pill-list li {
+            border: 1px solid var(--line);
+            padding: 0.38rem 0.7rem;
+            font-size: 0.88rem;
+            color: var(--muted);
+        }
+
+        .work-list {
+            display: grid;
+            gap: 1.6rem;
+        }
+
+        .work-item {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 1rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid var(--line);
+        }
+
+        .work-type {
+            display: inline-block;
+            margin-bottom: 0.35rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .text-link {
+            position: relative;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .resource-list {
+            list-style: none;
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        .resource-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 1rem;
+            align-items: start;
+            padding: 1rem 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .resource-row:first-child {
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        .note-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            color: var(--ink);
+            padding: 0.25rem 0.4rem;
+            margin: -0.25rem -0.4rem;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
         .note-item:hover {
-            background: #eaeaea;
+            background: #eaeaea3d;
             color: #000;
+            transform: translateX(6px);
         }
 
-        /* --- 6. GRID SIZING --- */
-        .header-block { grid-column: span 2; }
-        .tall-block { grid-row: span 2; }
+        .snapshot-grid,
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.3rem;
+        }
 
-        /* Mobile */
-        @media (max-width: 768px) {
-            .grid-container { grid-template-columns: 1fr; } 
-            .header-block, .tall-block { grid-column: span 1; grid-row: span 1; }
+        .snapshot-block,
+        .contact-block {
+            padding-top: 1rem;
+            border-top: 1px solid var(--line);
+        }
+
+        .mini-list {
+            list-style: none;
+            display: grid;
+            gap: 0.45rem;
+            margin-top: 0.75rem;
+            color: var(--muted);
+        }
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 1.2rem 0 2.2rem;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes drift {
+            from {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            to {
+                transform: translate3d(-2rem, -1rem, 0) scale(1.1);
+            }
+        }
+
+        @keyframes driftReverse {
+            from {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            to {
+                transform: translate3d(1.5rem, 1rem, 0) scale(1.08);
+            }
+        }
+
+        @media (max-width: 980px) {
+            .hero-grid,
+            .section-shell,
+            .detail-grid,
+            .snapshot-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-intro {
+                position: static;
+            }
+
+            .work-item,
+            .resource-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .site-header {
+                position: static;
+            }
+
+            .header-inner,
+            .site-nav {
+                justify-content: flex-start;
+            }
+
+            .hero {
+                min-height: auto;
+                padding-top: 3.5rem;
+            }
+
+            .shell {
+                width: min(1120px, calc(100% - 1.4rem));
+            }
+
+            .hero-copy h1 {
+                font-size: clamp(3rem, 18vw, 4.4rem);
+            }
+
+            .hero-actions,
+            .inline-links {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            section {
+                padding: 3.75rem 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
         }
     </style>
 </head>
 <body>
-
-    <div class="grid-container">
-        
-        <!-- BLOCK 1: INTRO -->
-        <div class="block header-block" style="cursor: default; border-color: #000;">
-            <div>
-                <span class="tag">Perfil</span>
-                <h1>Cory.</h1>
-                <p>Atmospheric Science Student.<br>Based in China.</p>
-            </div>
+    <header class="site-header">
+        <div class="shell header-inner">
+            <a class="brand" href="#top"><strong>Cory Kong</strong> / Academic Homepage</a>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="#about">About</a>
+                <a href="#research">Research</a>
+                <a href="#resources">Resources</a>
+                <a href="#cv">CV</a>
+                <a href="#contact">Contact</a>
+            </nav>
         </div>
+    </header>
 
-        <!-- BLOCK 2: GITHUB -->
-        <a href="https://github.com/corerorey" target="_blank" class="block block-interactive">
-            <div>
-                <span class="tag">Código</span>
-                <h2>GitHub</h2>
-                <p>Central repo.</p>
-            </div>
-            <span class="arrow">↗</span>
-        </a>
-
-        <!-- BLOCK 3: CV PDF -->
-        <a href="cv.pdf" target="_blank" class="block block-interactive">
-            <div>
-                <span class="tag">Resumen</span>
-                <h2>Curriculum</h2>
-                <p>PDF Format.</p>
-            </div>
-            <span class="arrow">↓</span>
-        </a>
-
-        <!-- BLOCK 4: WEB CV -->
-        <a href="cv.html" class="block block-interactive">
-            <div>
-                <span class="tag">Interactivo</span>
-                <h2>Web CV</h2>
-                <p>Digital history.</p>
-            </div>
-            <span class="arrow">→</span>
-        </a>
-
-        <!-- BLOCK 5: NOTES (THE TALL BLOCK) -->
-        <!-- This is no longer a single link, but a container for your notes -->
-        <div class="block tall-block">
-            <div>
-                <span class="tag">Apuntes</span>
-                <h2>Physics Notes</h2>
-                <p>Lectures & Derivations.</p>
-
-                <!-- The List of PDF Links -->
-                <div class="note-list">
-                    
-                    <!-- Note 1: E&M -->
-                    <!-- RENAME FILE TO: EM_Notes.pdf -->
-                    <a href="EM_Notes.pdf" target="_blank" class="note-item">
-                        <span>Electromagnetism</span>
-                        <span>↗</span>
-                    </a>
-
-                    <!-- Note 2: Quantum -->
-                    <!-- RENAME FILE TO: Quantum_Notes.pdf -->
-                    <a href="Quantum_Notes.pdf" target="_blank" class="note-item">
-                        <span>Quantum Mech.</span>
-                        <span>↗</span>
-                    </a>
-
+    <section class="hero" id="top">
+        <div class="shell hero-grid">
+            <div class="hero-copy">
+                <span class="eyebrow fade-up">Atmospheric Science / Lanzhou University</span>
+                <h1 class="fade-up delay-1">Cory Kong</h1>
+                <p class="subtitle fade-up delay-2">Studying atmospheric systems through dust events, exposure diagnostics, and environmental health questions.</p>
+                <p class="lede fade-up delay-3">Based in Lanzhou, Gansu, China, I use public data, reanalysis products, trajectory tools, and interpretable modeling workflows to study how atmospheric processes connect with health-relevant outcomes.</p>
+                <div class="hero-actions fade-up delay-4">
+                    <a class="button-link primary" href="cv.html">Read Full Web CV</a>
+                    <a class="button-link" href="https://github.com/corerorey/Sand-and-Dust-Events-and-Human-Health" target="_blank" rel="noreferrer">View Research Repository</a>
+                </div>
+                <div class="inline-links fade-up delay-4">
+                    <a class="text-link" href="mailto:coryk2875@gmail.com">coryk2875@gmail.com</a>
+                    <a class="text-link" href="https://github.com/corerorey" target="_blank" rel="noreferrer">GitHub Profile</a>
                 </div>
             </div>
+
+            <aside class="hero-rail" aria-label="Profile details">
+                <div class="rail-block fade-up delay-2">
+                    <span class="rail-label">Current focus</span>
+                    <p class="rail-text">Sand and dust events in Northwest China, exposure reconstruction, and interpretable environmental health workflows.</p>
+                </div>
+                <div class="rail-block fade-up delay-3">
+                    <span class="rail-label">Methods in use</span>
+                    <ul class="rail-list">
+                        <li>CNEMC, MERRA-2, ERA5, Himawari, and HYSPLIT pipelines</li>
+                        <li>GAM and DLNM baselines for lagged environmental effects</li>
+                        <li>Random Forest, SHAP, and causal refutation workflows</li>
+                    </ul>
+                </div>
+                <div class="rail-block fade-up delay-4">
+                    <span class="rail-label">Available now</span>
+                    <ul class="rail-list">
+                        <li>Research repository and working notes on GitHub</li>
+                        <li>Physics notes archive in PDF format</li>
+                        <li>Extended web CV and contact information</li>
+                    </ul>
+                </div>
+            </aside>
         </div>
+    </section>
 
-        <!-- BLOCK 6: PROJECT -->
-        <a href="https://github.com/corerorey/CMCM-Latex-Template" target="_blank" class="block block-interactive">
-            <div>
-                <span class="tag">Proyecto</span>
-                <h2>CMCM Template</h2>
-                <p>LaTeX structure.</p>
+    <main>
+        <section id="about">
+            <div class="shell section-shell">
+                <div class="section-intro">
+                    <span class="section-kicker">About</span>
+                    <h2 class="section-title">An academic homepage built around active work.</h2>
+                    <p class="section-blurb">This site is meant to orient visitors quickly: who I am, what I am studying, and where to start if you want to read code, notes, or a fuller profile.</p>
+                </div>
+                <div class="stack">
+                    <p>I am an atmospheric science student at Lanzhou University. My current public work centers on dust-event diagnostics, environmental exposure engineering, and computational pipelines that connect atmospheric observations with health-oriented questions.</p>
+                    <div class="detail-grid">
+                        <div class="detail-block">
+                            <h3>Research setting</h3>
+                            <p>Lanzhou, Gansu, China, with a current emphasis on Northwest China and dust-relevant environmental conditions.</p>
+                        </div>
+                        <div class="detail-block">
+                            <h3>Working style</h3>
+                            <p>Code-first, reproducible workflows that combine public data sources, diagnostics, and transparent modeling steps.</p>
+                        </div>
+                        <div class="detail-block">
+                            <h3>What to open first</h3>
+                            <p>The main research repository, the web CV, and the physics notes archive are the best starting points.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <span class="arrow">↗</span>
-        </a>
+        </section>
 
-        <!-- BLOCK 7: CONTACT -->
-        <a href="mailto:coryk2875@gmail.com" class="block block-interactive">
-            <div>
-                <span class="tag">Contacto</span>
-                <h2>Email Me</h2>
-                <p>Let's talk.</p>
+        <section id="research">
+            <div class="shell section-shell">
+                <div class="section-intro">
+                    <span class="section-kicker">Research Focus</span>
+                    <h2 class="section-title">Dust, exposure, and interpretable environmental health analysis.</h2>
+                    <p class="section-blurb">The current research thread moves from atmospheric measurements to exposure signals, then into health-facing statistical and machine-learning workflows.</p>
+                </div>
+                <div class="stack">
+                    <p>The central public project explores how sand and dust storm exposure may influence respiratory infectious disease risk, with an initial focus on measles in Northwest China. The workflow is organized around two linked paths: environmental exposure engineering and downstream health modeling.</p>
+                    <ul class="pill-list">
+                        <li>Dust-event diagnostics</li>
+                        <li>Exposure engineering</li>
+                        <li>Environmental epidemiology</li>
+                        <li>Trajectory analysis</li>
+                        <li>Interpretable machine learning</li>
+                        <li>Causal workflows</li>
+                    </ul>
+                    <div class="detail-grid">
+                        <div class="detail-block">
+                            <h3>Environmental inputs</h3>
+                            <p>CNEMC, MERRA-2, ERA5, Himawari, and HYSPLIT pipelines support event review and exposure reconstruction.</p>
+                        </div>
+                        <div class="detail-block">
+                            <h3>Modeling track</h3>
+                            <p>Current repository materials reference GAM, DLNM, Random Forest, SHAP, and DoWhy-based analytical components.</p>
+                        </div>
+                        <div class="detail-block">
+                            <h3>Public output</h3>
+                            <p>Code, workflow diagrams, representative figures, and documentation are all available through the main repository.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <span class="arrow">@</span>
-        </a>
+        </section>
 
-    </div>
+        <section>
+            <div class="shell section-shell">
+                <div class="section-intro">
+                    <span class="section-kicker">Selected Work</span>
+                    <h2 class="section-title">Two public repositories that define the current profile.</h2>
+                    <p class="section-blurb">Rather than listing everything, the homepage foregrounds the work that best represents current research interests and computational practice.</p>
+                </div>
+                <div class="work-list">
+                    <article class="work-item">
+                        <div>
+                            <span class="work-type">Research Repository</span>
+                            <h3>Sand and Dust Events and Human Health</h3>
+                            <p>A machine-learning-assisted analytical framework connecting sand and dust storm exposure with human-health questions, built around environmental data preparation, trajectory review, and interpretable modeling workflows.</p>
+                        </div>
+                        <a class="text-link" href="https://github.com/corerorey/Sand-and-Dust-Events-and-Human-Health" target="_blank" rel="noreferrer">Open repository</a>
+                    </article>
 
+                    <article class="work-item">
+                        <div>
+                            <span class="work-type">Computational Practice</span>
+                            <h3>Fortran Tutorial</h3>
+                            <p>A smaller public repository that reflects continued work with scientific computing tools and low-level numerical workflows alongside Python-based research code.</p>
+                        </div>
+                        <a class="text-link" href="https://github.com/corerorey/Fortran_tutorial" target="_blank" rel="noreferrer">Open repository</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources">
+            <div class="shell section-shell">
+                <div class="section-intro">
+                    <span class="section-kicker">Notes &amp; Resources</span>
+                    <h2 class="section-title">Working materials that are already available.</h2>
+                    <p class="section-blurb">This section keeps practical resources easy to reach: physics notes, the extended CV, and the broader GitHub profile.</p>
+                </div>
+                <div>
+                    <ul class="resource-list">
+                        <li class="resource-row">
+                            <div>
+                                <a class="note-item" href="EM_Notes.pdf" target="_blank" rel="noreferrer">Electromagnetism Notes</a>
+                                <p class="resource-meta">Lecture-based PDF notes and derivations for electromagnetism.</p>
+                            </div>
+                            <span>PDF</span>
+                        </li>
+                        <li class="resource-row">
+                            <div>
+                                <a class="note-item" href="Quantum_Notes.pdf" target="_blank" rel="noreferrer">Quantum Mechanics Notes</a>
+                                <p class="resource-meta">A companion PDF archive for quantum mechanics study notes.</p>
+                            </div>
+                            <span>PDF</span>
+                        </li>
+                        <li class="resource-row">
+                            <div>
+                                <a class="note-item" href="cv.html">Full Web CV</a>
+                                <p class="resource-meta">A more complete academic profile covering current status, interests, selected work, tools, and contact details.</p>
+                            </div>
+                            <span>Page</span>
+                        </li>
+                        <li class="resource-row">
+                            <div>
+                                <a class="note-item" href="https://github.com/corerorey" target="_blank" rel="noreferrer">GitHub Profile</a>
+                                <p class="resource-meta">Public repositories, working code, and additional project context.</p>
+                            </div>
+                            <span>External</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="cv">
+            <div class="shell section-shell">
+                <div class="section-intro">
+                    <span class="section-kicker">CV Snapshot</span>
+                    <h2 class="section-title">A quick profile before the full CV.</h2>
+                    <p class="section-blurb">The homepage keeps this brief. The longer version lives on the dedicated CV page for easier reading and linking.</p>
+                </div>
+                <div class="snapshot-grid">
+                    <div class="snapshot-block">
+                        <h3>Current status</h3>
+                        <p>Atmospheric science student at Lanzhou University, based in Lanzhou, Gansu, China.</p>
+                    </div>
+                    <div class="snapshot-block">
+                        <h3>Research interests</h3>
+                        <p>Dust events, atmospheric exposure diagnostics, environmental health questions, and interpretable computational analysis.</p>
+                    </div>
+                    <div class="snapshot-block">
+                        <h3>Tools in use</h3>
+                        <p>Python, Fortran, Git, LaTeX, HTML/CSS, HYSPLIT, MERRA-2, ERA5, GAM, DLNM, Random Forest, SHAP, and DoWhy.</p>
+                    </div>
+                    <div class="snapshot-block">
+                        <h3>Best next step</h3>
+                        <p><a class="text-link" href="cv.html">Open the full web CV</a> for a cleaner view of profile details, research interests, and public work.</p>
+                    </div>
+                    <div class="snapshot-block">
+                        <h3>Repository focus</h3>
+                        <p>The main public repository is the Sand and Dust Events and Human Health project, which anchors the research narrative of this site.</p>
+                    </div>
+                    <div class="snapshot-block">
+                        <h3>Open resources</h3>
+                        <p>Physics notes and project repositories remain directly accessible from the resources section above.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="shell section-shell">
+                <div class="section-intro">
+                    <span class="section-kicker">Contact</span>
+                    <h2 class="section-title">Reach out for research conversations or collaboration.</h2>
+                    <p class="section-blurb">Email remains the simplest channel. GitHub is the best place to follow public code and repository updates.</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-block">
+                        <h3>Email</h3>
+                        <p><a class="text-link" href="mailto:coryk2875@gmail.com">coryk2875@gmail.com</a></p>
+                    </div>
+                    <div class="contact-block">
+                        <h3>GitHub</h3>
+                        <p><a class="text-link" href="https://github.com/corerorey" target="_blank" rel="noreferrer">github.com/corerorey</a></p>
+                    </div>
+                    <div class="contact-block">
+                        <h3>Website</h3>
+                        <p><a class="text-link" href="cv.html">Full web CV</a> and this homepage together form the current public profile.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="shell">Cory Kong / Atmospheric Science / Lanzhou University</div>
+    </footer>
 </body>
 </html>
